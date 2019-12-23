@@ -1,37 +1,19 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+public class Selectors extends TestBase{
 
-public class Selectors {
-
-    WebDriver driver;
-
-    @BeforeMethod
-
-    public void setUp(){
-        driver = new ChromeDriver();
-         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
-
-        @Test
-        public void WikiElementsTest() {
-        driver.get("https://www.wikipedia.org/");
+    @Test
+        public void WikiElementsTest() throws InterruptedException {
+        //open site
+        openSite("https://www.wikipedia.org/");
+            //select lang bycss
         driver.findElement(By.cssSelector("#js-link-box-ru")).click();
-        driver.navigate().back();
-        driver.findElement(By.xpath("//*[@id='js-link-box-ru']")).click();
+            //back
+        back();
+        driver.findElement(By.xpath("//*[@id='js-link-box-en']")).click();
+
         }
 
 
-
-        @AfterMethod
-        public void tearDown() throws InterruptedException {
-            Thread.sleep(5000);
-            driver.quit();
-
-    }
 }
